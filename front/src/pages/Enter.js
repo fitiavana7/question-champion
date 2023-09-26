@@ -9,6 +9,18 @@ function Enter() {
     const [exist, setExist] = useState(false)
     const navigate = useNavigate()
     useEffect(()=> {
+      socket.emit('data',{}, ()=> {
+      })
+      const user = localStorage.getItem('name')
+      socket.emit('verify-account' , {name : user})
+      socket.on('verified'+user , data=>{
+          if(data.verified){
+              navigate("/answer", {replace : true})
+          }
+      })
+  }, [])
+
+    useEffect(()=> {
         socket.on("exist", (data) => {
           setExist(true)
         });

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
 import ENDPOINT from "../socket";
 import { useNavigate } from "react-router-dom";
+import { url } from "../lien";
 const socket = socketIOClient(ENDPOINT);
 
 function List() {
@@ -17,6 +18,10 @@ function List() {
       })
     }, [])
 
+    function handleLancer() {
+      socket.emit("rem-current")
+      navigate(url)
+    }
 
 
     return (
@@ -25,7 +30,9 @@ function List() {
               <p className="flex h-20 items-center rounded justify-center bg-indigo-600 px-4 text-2xl font-medium text-white sm:px-6 lg:px-8">APP GAME</p>
           </header>
           <div className="my-5 flex justify-end">
-              <button onClick={()=>navigate("/@k@t@@g0@v@n@")} type="button" className="inline-flex items-center rounded-md bg-orange-600 px-6 py-4 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              <button 
+                onClick={handleLancer}
+                type="button" className="inline-flex items-center rounded-md bg-orange-600 px-6 py-4 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                   Lancer
               </button>
           </div>

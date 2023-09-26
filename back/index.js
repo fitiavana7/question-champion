@@ -71,13 +71,15 @@ io.on('connection', (socket) => {
     if (exist) {
         socket.emit('exist', data);
     }else {
+      if(connectedUsers.length < 7){
         connectedUsers.push({
-            id: uuid(),
-            name: data.name,
-            score: 0
-        })
-        io.emit('joined_other', connectedUsers);
-        socket.emit('joined', data.name);
+          id: uuid(),
+          name: data.name,
+          score: 0
+      })
+      io.emit('joined_other', connectedUsers);
+      socket.emit('joined', data.name);
+      }
     }
     // Diffusez le message à tous les clients connectés.
   });
